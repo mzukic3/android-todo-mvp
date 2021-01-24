@@ -2,4 +2,6 @@
     <string name="app_name">todoist</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_unknown">Failed to load users, please try again</string>
+    <string name="try_again">Try Again</string>
 </resources>
