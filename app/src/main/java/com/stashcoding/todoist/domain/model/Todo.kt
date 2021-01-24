@@ -1,3 +1,3 @@
 package com.stashcoding.todoist.domain.model
 
-data class Todo(val id: String, val title: String)
+data class Todo(val id: Int, val title: String)
