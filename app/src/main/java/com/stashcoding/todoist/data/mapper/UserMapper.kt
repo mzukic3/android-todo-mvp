@@ -13,7 +13,6 @@ fun List<TasksResponseItem>.toUsers(): List<User> {
             }
             users[userId]?.add(it.toTask())
         }
-
     }
     return users.map {
         User(it.key, it.value)
@@ -21,5 +20,5 @@ fun List<TasksResponseItem>.toUsers(): List<User> {
 }
 
 fun TasksResponseItem.toTask(): Task {
-    return Task(this.id ?: 0,this.title?: "",this.completed?: false)
+    return Task(this.id ?: 0, this.title ?: "", this.completed ?: false)
 }

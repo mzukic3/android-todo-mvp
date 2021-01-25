@@ -1,6 +1,5 @@
 package com.stashcoding.todoist.data.network.response.todos
 
-
 import com.google.gson.annotations.SerializedName
 
 data class TasksResponseItem(

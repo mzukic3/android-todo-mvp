@@ -12,26 +12,33 @@ class UsersPresenter @Inject constructor(
     private val usersRepository: UsersRepository,
 ) : BasePresenter<UsersPresenter.View>() {
 
-    fun onGetUsers() {
-        view?.showLoading()
-        usersRepository
-            .getUsers()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    if (it.isEmpty()) {
-                        view?.showEmptyScreen()
-                    } else {
-                        view?.showUsers(it)
-                    }
-                },
-                {
+    private var users: List<User>? = null
 
-                    view?.showError("Something went wrong")
-                    throw it
-                }
-            )
-            .addToEventStream()
+    fun onGetUsers() {
+        users.let { users ->
+            if (users == null) {
+                view?.showLoading()
+                usersRepository
+                    .getUsers()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            this.users = it
+                            if (it.isEmpty()) {
+                                view?.showEmptyScreen()
+                            } else {
+                                view?.showUsers(it)
+                            }
+                        },
+                        {
+                            view?.showError("Something went wrong")
+                        }
+                    )
+                    .addToEventStream()
+            } else {
+                view?.showUsers(users)
+            }
+        }
     }
 
     interface View {

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Todoist">
-        <activity android:name=".ui.usertasks.TasksActivity"></activity>
+        <activity android:name=".ui.tasks.TasksActivity"></activity>
         <activity android:name=".ui.users.UsersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

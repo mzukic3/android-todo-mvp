@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.stashcoding.todoist.R
 import com.stashcoding.todoist.databinding.ActivityUsersBinding
 import com.stashcoding.todoist.domain.model.User
-import com.stashcoding.todoist.ui.usertasks.TasksActivity
+import com.stashcoding.todoist.ui.tasks.TasksActivity
 import com.stashcoding.todoist.util.hide
 import com.stashcoding.todoist.util.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ class UsersActivity : AppCompatActivity(), UsersPresenter.View {
         this.adapter = UsersAdapter {
             navigateToDetails(it)
         }
-//        binding.recyclerView.layoutManager = LinearLayoutManager(req)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = this.adapter
         binding.buttonRetry.setOnClickListener {
             presenter.onGetUsers()
@@ -37,11 +37,21 @@ class UsersActivity : AppCompatActivity(), UsersPresenter.View {
         presenter.onGetUsers()
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.attachView(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.detachView()
+    }
+
     override fun showUsers(users: List<User>) {
         binding.recyclerView.show()
         binding.errorText.hide()
         binding.progressBar.hide()
-        binding.buttonRetry.show()
+        binding.buttonRetry.hide()
         adapter.submitList(users)
     }
 

@@ -1,4 +1,4 @@
-package com.stashcoding.todoist.ui.usertasks
+package com.stashcoding.todoist.ui.tasks
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,10 @@ import com.stashcoding.todoist.databinding.ActivityTasksBinding
 import com.stashcoding.todoist.domain.model.Task
 import com.stashcoding.todoist.util.hide
 import com.stashcoding.todoist.util.show
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TasksActivity : AppCompatActivity(), TasksPresenter.View {
 
     @Inject
@@ -26,11 +28,13 @@ class TasksActivity : AppCompatActivity(), TasksPresenter.View {
         binding = ActivityTasksBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter.attachView(this)
+
         val userId = intent.getIntExtra(USER_ID, 0)
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = this@TasksActivity.adapter
-        }
+        this.adapter = TasksAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = this.adapter
+
+        presenter.onGetCompletedTasks(userId)
         binding.tabLayout.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
