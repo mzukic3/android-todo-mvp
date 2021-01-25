@@ -25,6 +25,7 @@ class TasksActivity : AppCompatActivity(), TasksPresenter.View {
         super.onCreate(savedInstanceState)
         binding = ActivityTasksBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        presenter.attachView(this)
         val userId = intent.getIntExtra(USER_ID, 0)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)

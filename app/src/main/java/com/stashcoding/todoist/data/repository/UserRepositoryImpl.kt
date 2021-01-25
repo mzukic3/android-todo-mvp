@@ -1,5 +1,6 @@
 package com.stashcoding.todoist.data.repository
 
+import com.stashcoding.todoist.data.mapper.toTask
 import com.stashcoding.todoist.data.mapper.toUsers
 import com.stashcoding.todoist.data.network.api.ApiService
 import com.stashcoding.todoist.domain.model.Task
@@ -25,7 +26,7 @@ class UserRepositoryImpl constructor(
             .subscribeOn(Schedulers.io())
             .toFlowable()
             .flatMapIterable { item -> item }
-            .map { Task(it.id, it.title, it.completed) }
+            .map { it.toTask() }
             .toList()
     }
 }

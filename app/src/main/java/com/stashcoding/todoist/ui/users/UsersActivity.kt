@@ -2,6 +2,7 @@ package com.stashcoding.todoist.ui.users
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.stashcoding.todoist.R
 import com.stashcoding.todoist.databinding.ActivityUsersBinding
 import com.stashcoding.todoist.domain.model.User
@@ -24,17 +25,23 @@ class UsersActivity : AppCompatActivity(), UsersPresenter.View {
         super.onCreate(savedInstanceState)
         binding = ActivityUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        presenter.attachView(this)
         this.adapter = UsersAdapter {
             navigateToDetails(it)
         }
+//        binding.recyclerView.layoutManager = LinearLayoutManager(req)
         binding.recyclerView.adapter = this.adapter
+        binding.buttonRetry.setOnClickListener {
+            presenter.onGetUsers()
+        }
+        presenter.onGetUsers()
     }
 
     override fun showUsers(users: List<User>) {
         binding.recyclerView.show()
         binding.errorText.hide()
         binding.progressBar.hide()
-        binding.buttonRetry.hide()
+        binding.buttonRetry.show()
         adapter.submitList(users)
     }
 
@@ -50,14 +57,14 @@ class UsersActivity : AppCompatActivity(), UsersPresenter.View {
         binding.recyclerView.hide()
         binding.errorText.hide()
         binding.progressBar.show()
-        binding.buttonRetry.show()
+        binding.buttonRetry.hide()
     }
 
     override fun showEmptyScreen() {
         binding.recyclerView.hide()
         binding.errorText.show()
         binding.progressBar.hide()
-        binding.buttonRetry.hide()
+        binding.buttonRetry.show()
         binding.errorText.text = getString(R.string.no_users_found)
     }
 
