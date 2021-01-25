@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Todoist">
-        <activity android:name=".ui.userdetails.UserDetailsActivity"></activity>
+        <activity android:name=".ui.usertasks.TasksActivity"></activity>
         <activity android:name=".ui.users.UsersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

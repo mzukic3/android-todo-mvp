@@ -11,7 +11,7 @@ class UsersPresenter @Inject constructor(
     private val usersRepository: UsersRepository,
 ) : BasePresenter<UsersPresenter.View>() {
 
-    fun loadUsers() {
+    fun onGetUsers() {
         view?.showLoading()
         usersRepository
             .getUsers()

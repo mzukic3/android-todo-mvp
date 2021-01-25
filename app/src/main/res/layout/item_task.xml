@@ -7,19 +7,19 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/userId"
+        android:id="@+id/task_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        tools:text="Userd ID: 1"
+        tools:text="Task ID: 1"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/uncompleted_tasks"
+        android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -28,6 +28,6 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userId"
-        tools:text="Uncompleted tasks: 10" />
+        app:layout_constraintTop_toBottomOf="@+id/task_id"
+        tools:text="Task 1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
